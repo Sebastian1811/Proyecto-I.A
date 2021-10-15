@@ -2,7 +2,7 @@ import sys, pygame
 import bfs
 pygame.init()
 
-size = width, height = 610, 490
+size = width, height = 1280, 720
 white = 255, 255, 255
 red = (255,0,0)
 black = (0,0,0)
@@ -60,5 +60,5 @@ while 1:
                 x+=121
         x=0
         y+=121
-
+        
     pygame.display.flip()
