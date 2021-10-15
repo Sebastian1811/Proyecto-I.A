@@ -94,4 +94,4 @@ def costoUniforme():
                     cola.put((int(mapa[tupla[0]][tupla[1]]),hijos[i])) #hijos en cola
         #print(visitados)
 
-costoUniforme()
+#costoUniforme()
