@@ -2,7 +2,7 @@ import sys, pygame
 import bfs
 pygame.init()
 
-size = width, height = 1280, 720
+size = width, height = 610, 490
 white = 255, 255, 255
 red = (255,0,0)
 black = (0,0,0)
@@ -24,7 +24,7 @@ while 1:
             try:
                 if event.key == pygame.K_UP:
                     mapa[int(Xamongus)][int(Yamongus)]="1"
-                    mapa[int(Xamongus)-1][int(Yamongus)]="5"
+                    mapa[(int(Xamongus)-1)][int(Yamongus)]="5"
                 if event.key == pygame.K_DOWN:
                     mapa[int(Xamongus)][int(Yamongus)]="1"
                     mapa[int(Xamongus)+1][int(Yamongus)]="5"
@@ -60,5 +60,5 @@ while 1:
                 x+=121
         x=0
         y+=121
-        
+
     pygame.display.flip()
