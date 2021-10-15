@@ -12,7 +12,6 @@ def makemapa():
     for i in range(len(mapaString)):
         if mapaString[i] == "\n":
             mapa.append(list(fila))
-            #print(fila)
             fila=''
             count+=1
         if mapaString[i] != "\n" and mapaString[i] !=" ":
@@ -26,25 +25,38 @@ def hijosNodo(nodo):
     if nodo[1]+1 < len(mapa[0]):
         hijos.append([nodo[0],nodo[1]+1])
 
-    if nodo[0]-1 > 0:
+    if nodo[0]-1 >= 0:
         hijos.append([nodo[0]-1,nodo[1]])
 
-    if nodo[1]-1 > 0:
+    if nodo[1]-1 >= 0:
         hijos.append([nodo[0],nodo[1]-1])
+    return hijos
 
-    print(hijos)
-
+def findStart():
+    x = 0
+    y = 0
+    for i in range(len(mapa)):
+        for j in range(len(mapa[0])):
+            if mapa[i][j] == "5":
+                x = i
+                y = j
+    return x,y
 def bfs():
     visitados = list()
-    makematriz()
-    cola.append(mapa[0][0])
-    visitados.append([0,0])
+    makemapa()
+    x,y = findStart()
+    hijos =list()
+    cola.append([x,y])
     while len(cola) != 0:
-        a = cola.popleft()
-        j=0
-        print(a)
-        for i in range(len(mapa)):
-            "como todos ven"
-
-#makemapa()
-#hijosNodo([0,0])
+        expand = cola.popleft()
+        visitados.append(expand)
+        if int(mapa[expand[0]][expand[1]]) == 4: # es meta?
+            print(expand[0]," ",expand[1])
+            break
+        hijos = hijosNodo([expand[0],expand[1]]) # creo los hijos
+        for i in range(len(hijos)):
+            if hijos[i] not in visitados: #no me devuelvo
+                tupla = hijos[i]
+                if int(mapa[tupla[0]][tupla[1]]) != 0: # no deberia mirar muros xd
+                    cola.append(hijos[i]) #hijos en cola
+bfs()
