@@ -12,7 +12,8 @@ y=0
 screen = pygame.display.set_mode(size,pygame.RESIZABLE)
 bfs.makemapa()
 mapa = bfs.mapa
-Mononoke = pygame.image.load("Among u s.png")
+Mononoke = pygame.image.load("mononoke.png")
+Mononoke = pygame.transform.scale(Mononoke, (100, 100))
 count = 0
 Xamongus = 0
 Yamongus = 0
