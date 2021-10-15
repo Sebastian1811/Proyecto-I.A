@@ -17,17 +17,17 @@ count = 0
 Xamongus = 0
 Yamongus = 0
 while 1:
-    screen.fill(white)
+    screen.fill(black)
     x=0
     y=0
 
     for fila in range(len(mapa)):
         for  columna in range(len(mapa[0])):
             if mapa[fila][columna] != "0" and mapa[fila][columna] != "5":
-                pygame.draw.rect(screen,black,[x,y,120,120],0)
+                pygame.draw.rect(screen,white,[x,y,120,120],0)
                 x+=121
             if mapa[fila][columna] == "0":
-                pygame.draw.rect(screen,red,[x,y,120,120],0)
+                pygame.draw.rect(screen,black,[x,y,120,120],0)
                 x+=121
             if mapa[fila][columna] == "5":
                 screen.blit(Mononoke,[x,y])
