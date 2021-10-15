@@ -49,17 +49,17 @@ while 1:
                         mapa[int(Xamongus)][int(Yamongus)]="1"
                         mapa[(int(Xamongus)-1)][int(Yamongus)]="5"
                 if event.key == pygame.K_DOWN:
-                    contenido = mapa[(int(Xamongus)-1)][int(Yamongus)]
+                    contenido = mapa[(int(Xamongus)+1)][int(Yamongus)]
                     if contenido != "0":
                         mapa[int(Xamongus)][int(Yamongus)]="1"
                         mapa[int(Xamongus)+1][int(Yamongus)]="5"
                 if event.key == pygame.K_LEFT:
-                    contenido = mapa[(int(Xamongus)-1)][int(Yamongus)]
+                    contenido = mapa[(int(Xamongus))][int(Yamongus)-1]
                     if contenido != "0":
                         mapa[int(Xamongus)][int(Yamongus)]="1"
                         mapa[int(Xamongus)][int(Yamongus)-1]="5"
                 if event.key == pygame.K_RIGHT:
-                    contenido = mapa[(int(Xamongus)-1)][int(Yamongus)]
+                    contenido = mapa[(int(Xamongus))][int(Yamongus)+1]
                     if contenido != "0":
                         mapa[int(Xamongus)][int(Yamongus)]="1"
                         mapa[int(Xamongus)][int(Yamongus)+1]="5"
