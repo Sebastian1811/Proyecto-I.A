@@ -12,16 +12,27 @@ def makemapa():
     for i in range(len(mapaString)):
         if mapaString[i] == "\n":
             mapa.append(list(fila))
-            print(fila)
+            #print(fila)
             fila=''
             count+=1
         if mapaString[i] != "\n" and mapaString[i] !=" ":
             fila += mapaString[i]
 
-    for i in range(len(mapa)):
-        for j in range(len(mapa[0])):
-            print(mapa[i][j]," ",end="")
-        print()
+def hijosNodo(nodo):
+    hijos = list()
+    if nodo[0]+1 < len(mapa):
+        hijos.append([nodo[0]+1,nodo[1]])
+
+    if nodo[1]+1 < len(mapa[0]):
+        hijos.append([nodo[0],nodo[1]+1])
+
+    if nodo[0]-1 > 0:
+        hijos.append([nodo[0]-1,nodo[1]])
+
+    if nodo[1]-1 > 0:
+        hijos.append([nodo[0],nodo[1]-1])
+
+    print(hijos)
 
 def bfs():
     visitados = list()
@@ -35,4 +46,5 @@ def bfs():
         for i in range(len(mapa)):
             "como todos ven"
 
-makemapa()
+#makemapa()
+#hijosNodo([0,0])
