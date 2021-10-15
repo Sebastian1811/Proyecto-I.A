@@ -20,6 +20,7 @@ while 1:
     screen.fill(white)
     x=0
     y=0
+
     for fila in range(len(mapa)):
         for  columna in range(len(mapa[0])):
             if mapa[fila][columna] != "0" and mapa[fila][columna] != "5":
@@ -43,8 +44,10 @@ while 1:
         elif event.type == pygame.KEYDOWN:
             try:
                 if event.key == pygame.K_UP:
-                    mapa[int(Xamongus)][int(Yamongus)]="1"
-                    mapa[(int(Xamongus)-1)][int(Yamongus)]="5"
+                    contenido = mapa[(int(Xamongus)-1)][int(Yamongus)]
+                    if contenido != "0":
+                        mapa[int(Xamongus)][int(Yamongus)]="1"
+                        mapa[(int(Xamongus)-1)][int(Yamongus)]="5"
                 if event.key == pygame.K_DOWN:
                     mapa[int(Xamongus)][int(Yamongus)]="1"
                     mapa[int(Xamongus)+1][int(Yamongus)]="5"
@@ -52,8 +55,10 @@ while 1:
                     mapa[int(Xamongus)][int(Yamongus)]="1"
                     mapa[int(Xamongus)][int(Yamongus)-1]="5"
                 if event.key == pygame.K_RIGHT:
-                    mapa[int(Xamongus)][int(Yamongus)]="1"
-                    mapa[int(Xamongus)][int(Yamongus)+1]="5"
+                    contenido = mapa[(int(Xamongus)-1)][int(Yamongus)]
+                    if contenido != "0":
+                        mapa[int(Xamongus)][int(Yamongus)]="1"
+                        mapa[int(Xamongus)][int(Yamongus)+1]="5"
             except Exception as inst:
                 print("amongus no tiene mas espacio")
 
