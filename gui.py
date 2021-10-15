@@ -28,9 +28,6 @@ while 1:
 
     for fila in range(len(mapa)):
         for  columna in range(len(mapa[0])):
-            if mapa[fila][columna] != "0" and mapa[fila][columna] != "5":
-                pygame.draw.rect(screen,white,[x,y,120,120],0)
-                x+=121
             if mapa[fila][columna] == "0":
                 pygame.draw.rect(screen,black,[x,y,120,120],0)
                 x+=121
@@ -44,6 +41,9 @@ while 1:
                 x+=121
             if mapa[fila][columna] == "2":
                 screen.blit(Elemental,[x,y])
+                x+=121
+            if mapa[fila][columna] == "1":
+                pygame.draw.rect(screen,white,[x,y,120,120],0)
                 x+=121
         x=0
         y+=121
