@@ -9,7 +9,7 @@ black = (0,0,0)
 x=0
 y=0
 
-screen = pygame.display.set_mode(size)
+screen = pygame.display.set_mode(size,pygame.RESIZABLE)
 bfs.makemapa()
 mapa = bfs.mapa
 Mononoke = pygame.image.load("Among u s.png")
@@ -17,29 +17,6 @@ count = 0
 Xamongus = 0
 Yamongus = 0
 while 1:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT: sys.exit()
-
-        elif event.type == pygame.KEYDOWN:
-            try:
-                if event.key == pygame.K_UP:
-                    mapa[int(Xamongus)][int(Yamongus)]="1"
-                    mapa[(int(Xamongus)-1)][int(Yamongus)]="5"
-                if event.key == pygame.K_DOWN:
-                    mapa[int(Xamongus)][int(Yamongus)]="1"
-                    mapa[int(Xamongus)+1][int(Yamongus)]="5"
-                if event.key == pygame.K_LEFT:
-                    mapa[int(Xamongus)][int(Yamongus)]="1"
-                    mapa[int(Xamongus)][int(Yamongus)-1]="5"
-                if event.key == pygame.K_RIGHT:
-                    mapa[int(Xamongus)][int(Yamongus)]="1"
-                    mapa[int(Xamongus)][int(Yamongus)+1]="5"
-            except Exception as inst:
-                print("amongus no tiene mas espacio")
-            
-
-
-    #pintar mapa
     screen.fill(white)
     x=0
     y=0
@@ -60,5 +37,29 @@ while 1:
                 x+=121
         x=0
         y+=121
-        
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT: sys.exit()
+
+        elif event.type == pygame.KEYDOWN:
+            try:
+                if event.key == pygame.K_UP:
+                    mapa[int(Xamongus)][int(Yamongus)]="1"
+                    mapa[(int(Xamongus)-1)][int(Yamongus)]="5"
+                if event.key == pygame.K_DOWN:
+                    mapa[int(Xamongus)][int(Yamongus)]="1"
+                    mapa[int(Xamongus)+1][int(Yamongus)]="5"
+                if event.key == pygame.K_LEFT:
+                    mapa[int(Xamongus)][int(Yamongus)]="1"
+                    mapa[int(Xamongus)][int(Yamongus)-1]="5"
+                if event.key == pygame.K_RIGHT:
+                    mapa[int(Xamongus)][int(Yamongus)]="1"
+                    mapa[int(Xamongus)][int(Yamongus)+1]="5"
+            except Exception as inst:
+                print("amongus no tiene mas espacio")
+
+
+
+    #pintar mapa
+
+
     pygame.display.flip()

@@ -1,6 +1,7 @@
 from collections import deque
 import txt
 cola = deque()
+colaDibujo = deque()
 mapa= list()
 mapaString=''
 
@@ -49,6 +50,7 @@ def bfs():
     cola.append([x,y])
     while len(cola) != 0:
         expand = cola.popleft()
+        colaDibujo.append(expand)
         visitados.append(expand)
         if int(mapa[expand[0]][expand[1]]) == 4: # es meta?
             print(expand[0]," ",expand[1])
@@ -59,4 +61,4 @@ def bfs():
                 tupla = hijos[i]
                 if int(mapa[tupla[0]][tupla[1]]) != 0: # no deberia mirar muros xd
                     cola.append(hijos[i]) #hijos en cola
-bfs()
+#bfs()
