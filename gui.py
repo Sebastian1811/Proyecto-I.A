@@ -1,7 +1,7 @@
 import sys, pygame
 pygame.init()
 
-size = width, height = 720, 480
+size = width, height = 1720, 900
 white = 255, 255, 255
 red = (255,0,0)
 x=0
