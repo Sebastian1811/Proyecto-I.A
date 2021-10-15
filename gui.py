@@ -22,13 +22,21 @@ while 1:
 
         elif event.type == pygame.KEYDOWN:
             try:
+                if event.key == pygame.K_UP:
+                    mapa[int(Xamongus)][int(Yamongus)]="1"
+                    mapa[int(Xamongus)-1][int(Yamongus)]="5"
+                if event.key == pygame.K_DOWN:
+                    mapa[int(Xamongus)][int(Yamongus)]="1"
+                    mapa[int(Xamongus)+1][int(Yamongus)]="5"
+                if event.key == pygame.K_LEFT:
+                    mapa[int(Xamongus)][int(Yamongus)]="1"
+                    mapa[int(Xamongus)][int(Yamongus)-1]="5"
                 if event.key == pygame.K_RIGHT:
-                #print(Xamongus," ",Yamongus)
                     mapa[int(Xamongus)][int(Yamongus)]="1"
                     mapa[int(Xamongus)][int(Yamongus)+1]="5"
-                    count+=1
             except Exception as inst:
                 print("amongus no tiene mas espacio")
+            
 
 
     #pintar mapa
@@ -52,17 +60,5 @@ while 1:
                 x+=121
         x=0
         y+=121
-
-    #mover derecha
-    """if not count:
-        print(Xamongus," ",Yamongus)
-        mapa[int(Xamongus)][int(Yamongus)]="1"
-        mapa[int(Xamongus)-1][int(Yamongus)+1]="5"
-        count+=1"""
-
-
-
-
-
-
+        
     pygame.display.flip()
