@@ -14,6 +14,10 @@ bfs.makemapa()
 mapa = bfs.mapa
 Mononoke = pygame.image.load("mononoke.png")
 Mononoke = pygame.transform.scale(Mononoke, (100, 100))
+Ciervo = pygame.image.load("ciervo.png")
+Ciervo = pygame.transform.scale(Ciervo,(100,100))
+Elemental = pygame.image.load("elementales.png")
+Elemental = pygame.transform.scale(Elemental,(100,100))
 count = 0
 Xamongus = 0
 Yamongus = 0
@@ -32,10 +36,14 @@ while 1:
                 x+=121
             if mapa[fila][columna] == "5":
                 screen.blit(Mononoke,[x,y])
-                #pygame.draw.rect(screen,white,[x,y,40,40],0)
-                #print(fila, " ",columna)
                 Xamongus = fila
                 Yamongus = columna
+                x+=121
+            if mapa[fila][columna] == "3":
+                screen.blit(Ciervo,[x,y])
+                x+=121
+            if mapa[fila][columna] == "2":
+                screen.blit(Elemental,[x,y])
                 x+=121
         x=0
         y+=121
