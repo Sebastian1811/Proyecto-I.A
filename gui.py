@@ -12,22 +12,23 @@ y=0
 screen = pygame.display.set_mode(size,pygame.RESIZABLE)
 bfs.makemapa()
 mapa = bfs.mapa
-Mononoke = pygame.image.load("Among u s.png")
+Mononoke = pygame.image.load("mononoke.png")
+Mononoke = pygame.transform.scale(Mononoke, (100, 100))
 count = 0
 Xamongus = 0
 Yamongus = 0
 while 1:
-    screen.fill(white)
+    screen.fill(black)
     x=0
     y=0
 
     for fila in range(len(mapa)):
         for  columna in range(len(mapa[0])):
             if mapa[fila][columna] != "0" and mapa[fila][columna] != "5":
-                pygame.draw.rect(screen,black,[x,y,120,120],0)
+                pygame.draw.rect(screen,white,[x,y,120,120],0)
                 x+=121
             if mapa[fila][columna] == "0":
-                pygame.draw.rect(screen,red,[x,y,120,120],0)
+                pygame.draw.rect(screen,black,[x,y,120,120],0)
                 x+=121
             if mapa[fila][columna] == "5":
                 screen.blit(Mononoke,[x,y])
@@ -49,17 +50,17 @@ while 1:
                         mapa[int(Xamongus)][int(Yamongus)]="1"
                         mapa[(int(Xamongus)-1)][int(Yamongus)]="5"
                 if event.key == pygame.K_DOWN:
-                    contenido = mapa[(int(Xamongus)-1)][int(Yamongus)]
+                    contenido = mapa[(int(Xamongus)+1)][int(Yamongus)]
                     if contenido != "0":
                         mapa[int(Xamongus)][int(Yamongus)]="1"
                         mapa[int(Xamongus)+1][int(Yamongus)]="5"
                 if event.key == pygame.K_LEFT:
-                    contenido = mapa[(int(Xamongus)-1)][int(Yamongus)]
+                    contenido = mapa[(int(Xamongus))][int(Yamongus)-1]
                     if contenido != "0":
                         mapa[int(Xamongus)][int(Yamongus)]="1"
                         mapa[int(Xamongus)][int(Yamongus)-1]="5"
                 if event.key == pygame.K_RIGHT:
-                    contenido = mapa[(int(Xamongus)-1)][int(Yamongus)]
+                    contenido = mapa[(int(Xamongus))][int(Yamongus)+1]
                     if contenido != "0":
                         mapa[int(Xamongus)][int(Yamongus)]="1"
                         mapa[int(Xamongus)][int(Yamongus)+1]="5"
