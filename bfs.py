@@ -92,5 +92,6 @@ def costoUniforme():
                     cola.put((0,hijos[i]))
                 if int(mapa[tupla[0]][tupla[1]]) != 0: # no deberia mirar muros xd
                     cola.put((int(mapa[tupla[0]][tupla[1]]),hijos[i])) #hijos en cola
-                    print(visitados)
-#costoUniforme()
+        #print(visitados)
+
+costoUniforme()
