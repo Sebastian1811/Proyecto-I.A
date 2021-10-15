@@ -18,6 +18,9 @@ Ciervo = pygame.image.load("ciervo.png")
 Ciervo = pygame.transform.scale(Ciervo,(100,100))
 Elemental = pygame.image.load("elementales.png")
 Elemental = pygame.transform.scale(Elemental,(100,100))
+dios_Ciervo = pygame.image.load("dios_ciervo.png")
+dios_Ciervo = pygame.transform.scale(dios_Ciervo,(100,100))
+
 count = 0
 Xamongus = 0
 Yamongus = 0
@@ -39,6 +42,9 @@ while 1:
             if mapa[fila][columna] == "3":
                 screen.blit(Ciervo,[x,y])
                 x+=121
+            if mapa[fila][columna] == "4":
+                screen.blit(dios_Ciervo,[x,y])
+                x+=121
             if mapa[fila][columna] == "2":
                 screen.blit(Elemental,[x,y])
                 x+=121
@@ -54,22 +60,22 @@ while 1:
             try:
                 if event.key == pygame.K_UP:
                     contenido = mapa[(int(Xamongus)-1)][int(Yamongus)]
-                    if contenido != "0":
+                    if contenido != "0" or contenido !="4" or contenido != "2":
                         mapa[int(Xamongus)][int(Yamongus)]="1"
                         mapa[(int(Xamongus)-1)][int(Yamongus)]="5"
                 if event.key == pygame.K_DOWN:
                     contenido = mapa[(int(Xamongus)+1)][int(Yamongus)]
-                    if contenido != "0":
+                    if contenido != "0" or contenido !="4" or contenido != "2":
                         mapa[int(Xamongus)][int(Yamongus)]="1"
                         mapa[int(Xamongus)+1][int(Yamongus)]="5"
                 if event.key == pygame.K_LEFT:
                     contenido = mapa[(int(Xamongus))][int(Yamongus)-1]
-                    if contenido != "0":
+                    if contenido != "0" or contenido !="4" or contenido != "2":
                         mapa[int(Xamongus)][int(Yamongus)]="1"
                         mapa[int(Xamongus)][int(Yamongus)-1]="5"
                 if event.key == pygame.K_RIGHT:
                     contenido = mapa[(int(Xamongus))][int(Yamongus)+1]
-                    if contenido != "0":
+                    if contenido != "0" or contenido !="4" or contenido != "2":
                         mapa[int(Xamongus)][int(Yamongus)]="1"
                         mapa[int(Xamongus)][int(Yamongus)+1]="5"
             except Exception as inst:
