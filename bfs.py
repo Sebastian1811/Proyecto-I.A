@@ -1,38 +1,38 @@
 from collections import deque
+import txt
 cola = deque()
 mapa= list()
+mapaString=''
 
-def makematriz():
-    a= [0]*5
-    for i in range(4):
-        mapa.append(a)
+def makemapa():
+    fila = ''
+    count = 0
+    global mapaString
+    mapaString = txt.leerTxt('mapa.txt')
+    for i in range(len(mapaString)):
+        if mapaString[i] == "\n":
+            mapa.append(list(fila))
+            print(fila)
+            fila=''
+            count+=1
+        if mapaString[i] != "\n" and mapaString[i] !=" ":
+            fila += mapaString[i]
+
+    for i in range(len(mapa)):
+        for j in range(len(mapa[0])):
+            print(mapa[i][j]," ",end="")
+        print()
 
 def bfs():
     visitados = list()
     makematriz()
     cola.append(mapa[0][0])
     visitados.append([0,0])
-    while  len(cola) != 0:
+    while len(cola) != 0:
         a = cola.popleft()
         j=0
         print(a)
         for i in range(len(mapa)):
-            nodo =[i,j]
-            if i == 0 or j== 0 :
-                nodo = [i,j+1]
-                if nodo not in visitados:
-                    visitados.append(nodo)
-                nodo = [i+1,j]
-                if nodo not in visitados:
-                    visitados.append(nodo)
-            if i==len(mapa) or j==len(mapa):
-                nodo = [i,j+1]
-                if nodo not in visitados:
-                    visitados.append(nodo)
-                nodo = [i+1,j]
-                if nodo not in visitados:
-                    visitados.append(nodo) 
-            if nodo not in visitados:
+            "como todos ven"
 
-        j += 1
-bfs()
+makemapa()
