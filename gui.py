@@ -21,11 +21,14 @@ while 1:
         if event.type == pygame.QUIT: sys.exit()
 
         elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_RIGHT:
-                print(Xamongus," ",Yamongus)
-                mapa[int(Xamongus)][int(Yamongus)]="1"
-                mapa[int(Xamongus)][int(Yamongus)+1]="5"
-                count+=1
+            try:
+                if event.key == pygame.K_RIGHT:
+                #print(Xamongus," ",Yamongus)
+                    mapa[int(Xamongus)][int(Yamongus)]="1"
+                    mapa[int(Xamongus)][int(Yamongus)+1]="5"
+                    count+=1
+            except Exception as inst:
+                print("amongus no tiene mas espacio")
 
 
     #pintar mapa
@@ -56,8 +59,8 @@ while 1:
         mapa[int(Xamongus)][int(Yamongus)]="1"
         mapa[int(Xamongus)-1][int(Yamongus)+1]="5"
         count+=1"""
-    
-    
+
+
 
 
 
