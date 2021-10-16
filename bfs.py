@@ -1,11 +1,13 @@
 from collections import deque
 import txt
 import queue
+import nodo
 cola = deque()
 colaDibujo = deque()
 mapa= list()
 mapaString=''
-
+path = list()
+indexPath = 0
 def makemapa():
     fila = ''
     count = 0
@@ -49,17 +51,21 @@ def refactorMapa():
             if mapa[i][j] == "2":
                 mapa[i][j] = "1"
 def bfs():
+    count =0
+    global indexPath
     visitados = list()
+    nodos = list()
     makemapa()
     x,y = findElement("5")
     hijos =list()
     cola.append([x,y])
+    Nodo = nodo.Nodo(list(),[x,y])
+    nodos.append(Nodo.makenodo())
     while len(cola) != 0:
         expand = cola.popleft()
         colaDibujo.append(expand)
         visitados.append(expand)
         if int(mapa[expand[0]][expand[1]]) == 4: # es meta?
-            print(expand[0]," ",expand[1])
             break
         hijos = hijosNodo([expand[0],expand[1]]) # creo los hijos
         for i in range(len(hijos)):
@@ -67,6 +73,26 @@ def bfs():
                 tupla = hijos[i]
                 if int(mapa[tupla[0]][tupla[1]]) != 0: # no deberia mirar muros xd
                     cola.append(hijos[i]) #hijos en cola
+                    nodo_ = nodo.Nodo(nodos[findPadre(expand,nodos)],hijos[i])
+                    nodos.append(nodo_.makenodo())
+                    if hijos[i] == [0,4] and count == 0:
+                        indexPath= findPadre(hijos[i],nodos)
+                        count +=1
+    return nodos
+def findPadre(tupla,lista):
+    for i in lista:
+        if i[1] == tupla:
+            return lista.index(i)
+
+def findPath(nodo):
+    global path
+    if nodo[0] == []:
+        path.append(nodo[1])
+        return 1
+    else:
+        path.append(nodo[1])
+        findPath(nodo[0])
+
 def costoUniforme():
     costoAcumulado = 0
     #ciervo = false
@@ -128,13 +154,11 @@ def profundidadIterativa():
                     if int(mapa[tupla[0]][tupla[1]]) != 0: # no deberia mirar muros xd
                         cola.append(hijos[i]) #hijos en cola
             profAux -=1
-            #print(1)
-        print(cola)
         cola = deque()
         cola.append([x,y])
-
         visitados = list()
-    print(profundidad)
-
-
-profundidadIterativa()
+if __name__ == '__main__':
+    nodos = bfs()
+    nodoMeta = nodos[indexPath]
+    findPath(nodoMeta)
+    print(path)
