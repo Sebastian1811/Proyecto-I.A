@@ -51,20 +51,20 @@ def refactorMapa():
             if mapa[i][j] == "2":
                 mapa[i][j] = "1"
 def bfs():
-    count =0
-    global indexPath
     visitados = list()
     nodos = list()
     makemapa()
     x,y = findElement("5")
     hijos =list()
     cola.append([x,y])
-    Nodo = nodo.Nodo(list(),[x,y])
+    Nodo = nodo.Nodo(list(),[x,y],0)
     nodos.append(Nodo.makenodo())
     while len(cola) != 0:
         expand = cola.popleft()
         colaDibujo.append(expand)
         visitados.append(expand)
+        #print(nodos[findPadre(expand,nodos)][2])
+        nodos[findPadre(expand,nodos)][2] = 1
         if int(mapa[expand[0]][expand[1]]) == 4: # es meta?
             break
         hijos = hijosNodo([expand[0],expand[1]]) # creo los hijos
@@ -74,24 +74,26 @@ def bfs():
                 if int(mapa[tupla[0]][tupla[1]]) != 0: # no deberia mirar muros xd
                     cola.append(hijos[i]) #hijos en cola
                     #nodo_ = nodo.Nodo(nodos[len(nodos)-1],hijos[i])
-                    nodo_ = nodo.Nodo(nodos[findPadre(expand,nodos)],hijos[i])
+                    nodo_ = nodo.Nodo(nodos[findPadre(expand,nodos)],hijos[i],0)
                     nodos.append(nodo_.makenodo())
-                    if hijos[i] == [0,4] and count == 0:
-                        indexPath= findPadre(hijos[i],nodos)
-                        count +=1
-        print("jeje")                
     return nodos
 def findPadre(tupla,lista):
     for i in lista:
         if i[1] == tupla:
             return lista.index(i)
+def findBranch(lista):
+    branch = 0
+    for i in lista:
+        if i[2]:
+            branch = i
+    return branch
 
 def findPath(nodo):
     global path
     if nodo[0] == []:
         path.append(nodo[1])
         return 1
-    else:
+    elif nodo[2]:
         path.append(nodo[1])
         findPath(nodo[0])
 
@@ -159,8 +161,29 @@ def profundidadIterativa():
         cola = deque()
         cola.append([x,y])
         visitados = list()
+def returnPath(algoritmo):
+    global path
+    if algoritmo == 1:
+        nodos = bfs()
+        nodoMeta = findBranch(nodos)
+        findPath(nodoMeta)
+        rPath = path
+        path = list()
+        return list(reversed(rPath))
+    if algoritmo == 2:
+        nodos = costoUniforme()
+        nodoMeta = findBranch(nodos)
+        findPath(nodoMeta)
+        rPath = path
+        path = list()
+        return list(reversed(Rpath))
+    if algoritmo == 3:
+        nodos = costoUniforme()
+        nodoMeta = findBranch(nodos)
+        findPath(nodoMeta)
+        rPath = path
+        path = list()
+        return list(reversed(rPath))
+
 if __name__ == '__main__':
-    nodos = bfs()
-    nodoMeta = nodos[indexPath]
-    findPath(nodoMeta)
-    print(path)
+    print(returnPath(1))
