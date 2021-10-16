@@ -34,12 +34,12 @@ def hijosNodo(nodo):
         hijos.append([nodo[0],nodo[1]-1])
     return hijos
 
-def findStart():
+def findElement(element):
     x = 0
     y = 0
     for i in range(len(mapa)):
         for j in range(len(mapa[0])):
-            if mapa[i][j] == "5":
+            if mapa[i][j] == element:
                 x = i
                 y = j
     return x,y
@@ -68,30 +68,38 @@ def bfs():
                 if int(mapa[tupla[0]][tupla[1]]) != 0: # no deberia mirar muros xd
                     cola.append(hijos[i]) #hijos en cola
 def costoUniforme():
+    costoAcumulado = 0
+    ciervo = false
     cola = queue.PriorityQueue()
     visitados = list()
     makemapa()
-    x,y = findStart()
-    hijos =list()
+    x,y = findStart("5")
+    hijos = list()
     cola.put((0,[x,y]))
+    xv,yv = findStart("3")
+    tuplaCiervo =[xv,yv]
     while cola is not cola.empty():
         expandL = list(cola.get())
         expand = expandL[1]
+        costoAcumulado = expandL[0]
         colaDibujo.append(expand)
         visitados.append(expand)
         if int(mapa[expand[0]][expand[1]]) == 4: # es meta?
-            print(expand[0]," ",expand[1])
+            #print(expand[0]," ",expand[1])
             break
         if int(mapa[expand[0]][expand[1]]) == 3:
             refactorMapa()
         hijos = hijosNodo([expand[0],expand[1]]) # creo los hijos
-        for i in range(len(hijos)):
-            if hijos[i] not in visitados: #no me devuelvo
-                tupla = hijos[i]
-                if int(mapa[tupla[0]][tupla[1]]) != 0 and int(mapa[expand[0]][expand[1]]) == 3:
-                    cola.put((0,hijos[i]))
-                if int(mapa[tupla[0]][tupla[1]]) != 0: # no deberia mirar muros xd
-                    cola.put((int(mapa[tupla[0]][tupla[1]]),hijos[i])) #hijos en cola
-        #print(visitados)
-
-#costoUniforme()
+        if len(hijos) != 0:
+            for i in range(len(hijos)):
+                if hijos[i] not in visitados: #no me devuelvo
+                    tupla = hijos[i]
+                    if int(mapa[tupla[0]][tupla[1]]) == 4 :
+                        cola.put((1+costoAcumulado,hijos[i]))
+                    if int(mapa[tupla[0]][tupla[1]]) == 3 :
+                        ciervo = 1
+                        cola.put((1+costoAcumulado,hijos[i]))
+                    if int(mapa[tupla[0]][tupla[1]]) != 0 and int(mapa[tupla[0]][tupla[1]]) != 3 and int(mapa[tupla[0]][tupla[1]]) != 4 : # no deberia mirar muros xd
+                        cola.put((int(mapa[tupla[0]][tupla[1]])+costoAcumulado,hijos[i])) #hijos en cola
+                        
+costoUniforme()
