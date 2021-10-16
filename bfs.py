@@ -73,6 +73,7 @@ def bfs():
                 tupla = hijos[i]
                 if int(mapa[tupla[0]][tupla[1]]) != 0: # no deberia mirar muros xd
                     cola.append(hijos[i]) #hijos en cola
+                    #nodo_ = nodo.Nodo(nodos[len(nodos)-1],hijos[i])
                     nodo_ = nodo.Nodo(nodos[findPadre(expand,nodos)],hijos[i])
                     nodos.append(nodo_.makenodo())
                     if hijos[i] == [0,4] and count == 0:
@@ -161,4 +162,4 @@ if __name__ == '__main__':
     nodos = bfs()
     nodoMeta = nodos[indexPath]
     findPath(nodoMeta)
-    print(path)
+    print(path.reverse())
