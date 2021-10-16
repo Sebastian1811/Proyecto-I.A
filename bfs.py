@@ -79,6 +79,7 @@ def bfs():
                     if hijos[i] == [0,4] and count == 0:
                         indexPath= findPadre(hijos[i],nodos)
                         count +=1
+        print("jeje")                
     return nodos
 def findPadre(tupla,lista):
     for i in lista:
@@ -162,4 +163,4 @@ if __name__ == '__main__':
     nodos = bfs()
     nodoMeta = nodos[indexPath]
     findPath(nodoMeta)
-    print(path.reverse())
+    print(path)
