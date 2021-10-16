@@ -51,7 +51,7 @@ def refactorMapa():
 def bfs():
     visitados = list()
     makemapa()
-    x,y = findStart()
+    x,y = findElement("5")
     hijos =list()
     cola.append([x,y])
     while len(cola) != 0:
@@ -69,14 +69,14 @@ def bfs():
                     cola.append(hijos[i]) #hijos en cola
 def costoUniforme():
     costoAcumulado = 0
-    ciervo = false
+    #ciervo = false
     cola = queue.PriorityQueue()
     visitados = list()
     makemapa()
-    x,y = findStart("5")
+    x,y = findElement("5")
     hijos = list()
     cola.put((0,[x,y]))
-    xv,yv = findStart("3")
+    xv,yv = findElement("3")
     tuplaCiervo =[xv,yv]
     while cola is not cola.empty():
         expandL = list(cola.get())
@@ -97,9 +97,44 @@ def costoUniforme():
                     if int(mapa[tupla[0]][tupla[1]]) == 4 :
                         cola.put((1+costoAcumulado,hijos[i]))
                     if int(mapa[tupla[0]][tupla[1]]) == 3 :
-                        ciervo = 1
+                        #ciervo = 1
                         cola.put((1+costoAcumulado,hijos[i]))
                     if int(mapa[tupla[0]][tupla[1]]) != 0 and int(mapa[tupla[0]][tupla[1]]) != 3 and int(mapa[tupla[0]][tupla[1]]) != 4 : # no deberia mirar muros xd
                         cola.put((int(mapa[tupla[0]][tupla[1]])+costoAcumulado,hijos[i])) #hijos en cola
-                        
-costoUniforme()
+def profundidadIterativa():
+    cola = deque()
+    hijos = list()
+    makemapa()
+    x,y = findElement("5")
+    cola.append([x,y])
+    visitados = list()
+    profundidad = -1
+    find = 0
+    while not find:
+        profundidad +=1
+        profAux = profundidad
+        while len(cola) != 0 and profAux >= 0:
+            expand = cola.popleft()
+            visitados.append(expand)
+            if int(mapa[expand[0]][expand[1]]) == 4: # es meta?
+                #print(expand[0]," ",expand[1])
+                find = 1
+                break
+            hijos = hijosNodo([expand[0],expand[1]]) # creo los hijos
+            #print(len(hijos))
+            for i in range(len(hijos)):
+                if hijos[i] not in visitados: #no me devuelvo
+                    tupla = hijos[i]
+                    if int(mapa[tupla[0]][tupla[1]]) != 0: # no deberia mirar muros xd
+                        cola.append(hijos[i]) #hijos en cola
+            profAux -=1
+            #print(1)
+        print(cola)
+        cola = deque()
+        cola.append([x,y])
+
+        visitados = list()
+    print(profundidad)
+
+
+profundidadIterativa()
