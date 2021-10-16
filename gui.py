@@ -60,22 +60,22 @@ while 1:
             try:
                 if event.key == pygame.K_UP:
                     contenido = mapa[(int(Xamongus)-1)][int(Yamongus)]
-                    if contenido != "0":
+                    if contenido != "0" and not int(Xamongus) <=0 :
                         mapa[int(Xamongus)][int(Yamongus)]="1"
-                        mapa[(int(Xamongus)-1)][int(Yamongus)]="5"
+                        mapa[(int(Xamongus)-1)][int(Yamongus)]="5"      
                 if event.key == pygame.K_DOWN:
                     contenido = mapa[(int(Xamongus)+1)][int(Yamongus)]
-                    if contenido != "0":
+                    if contenido != "0" and not int(Xamongus) >= 3:
                         mapa[int(Xamongus)][int(Yamongus)]="1"
                         mapa[int(Xamongus)+1][int(Yamongus)]="5"
                 if event.key == pygame.K_LEFT:
                     contenido = mapa[(int(Xamongus))][int(Yamongus)-1]
-                    if contenido != "0":
+                    if contenido != "0" and not int(Yamongus) <= 0:
                         mapa[int(Xamongus)][int(Yamongus)]="1"
                         mapa[int(Xamongus)][int(Yamongus)-1]="5"
                 if event.key == pygame.K_RIGHT:
                     contenido = mapa[(int(Xamongus))][int(Yamongus)+1]
-                    if contenido != "0":
+                    if contenido != "0" and not int(Yamongus) >= 4:
                         mapa[int(Xamongus)][int(Yamongus)]="1"
                         mapa[int(Xamongus)][int(Yamongus)+1]="5"
             except Exception as inst:
