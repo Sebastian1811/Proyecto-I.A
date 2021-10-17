@@ -190,7 +190,7 @@ def iterativa():
     cola.append([x,y])
     visitados = list()
     arboles.append([])
-    profundidad = 0
+    profundidad = 1
     find = 2
     Nodo = nodo.Nodo(list(),[x,y],0)
     nodos.append(Nodo.makenodo())
@@ -201,8 +201,8 @@ def iterativa():
             expand = cola.popleft()
             visitados.append(expand)
             nodos[findPadre(expand,nodos)][2] = 1
-            arbol_ = nodo.Nodo(arboles[len(arboles)-1],expand,1)
-            arboles.append(arbol_.makenodo())
+            #arbol_ = nodo.Nodo(arboles[len(arboles)-1],expand,1)
+            #arboles.append(arbol_.makenodo())
             if int(mapa[expand[0]][expand[1]]) == 4:
                 find = 1
                 break
@@ -218,15 +218,17 @@ def iterativa():
                             arbol.append(arbol_.makenodo())"""
                             nodo_ = nodo.Nodo(nodos[findPadre(expand,nodos)],hijos[i],0)
                             nodos.append(nodo_.makenodo())
-            profAux -= 1
+            #profAux -= 1
+        profundidad-= 1
         cola = deque()
         cola.append([x,y])
         visitados = list()
+        arboles.append(nodos)
         nodos = list()
         Nodo = nodo.Nodo(list(),[x,y],0)
         nodos.append(Nodo.makenodo())
-
-        find = 1
+        if not profundidad:
+            find = 1
     return arboles
 
 def returnPath(algoritmo):
@@ -250,7 +252,8 @@ def returnPath(algoritmo):
         return list(reversed(rPath))
     if algoritmo == 3:
         nodos = iterativa()
-        nodoMeta = findBranch(nodos)
+        x,y = findElement('4')
+        nodoMeta = findBranch(nodos,[x,y])
         findPath(nodoMeta)
         rPath = path
         path = list()
@@ -259,7 +262,7 @@ def returnPath(algoritmo):
 if __name__ == '__main__':
     #a = 0
     #a = iterativa()
-    print(returnPath(2))
+    print(iterativa())
     #print(arbol)
     #print(a)
     """for i in a:
