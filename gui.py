@@ -10,7 +10,6 @@ black = (0,0,0)
 x=0
 y=0
 screen = pygame.display.set_mode(size,pygame.RESIZABLE)
-#bfs.makemapa()
 mapa = bfs.mapa
 camino = bfs.returnPath(1)
 Mononoke = pygame.image.load("mononoke.png")
@@ -29,13 +28,16 @@ count = 0
 Xamongus = 0
 Yamongus = 0
 
-"""def Eventos_teclado():
+def Eventos_teclado():
     global camino
     if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_q:
             camino = bfs.returnPath(1)
+            print("Si entro")
         if event.key == pygame.K_w:
-            camino = bfs.returnPath(2)"""
+            camino = bfs.returnPath(2)
+            print("si entro")
+    
 
 
 def pintarmapa():
@@ -69,7 +71,6 @@ def pintarmapa():
         y+=121
 
 i = 0
-j = 0
 def guiarMononoke():
     global i
     global Xamongus
@@ -88,7 +89,7 @@ while 1:
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT: sys.exit()
-        #Eventos_teclado()
+        Eventos_teclado()
     guiarMononoke()
     time.sleep(0.5)
     screen.blit(Aviso_Amplitud,(40,510))
