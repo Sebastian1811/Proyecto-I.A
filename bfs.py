@@ -118,6 +118,7 @@ def costoUniforme():
         costoAcumulado = expandL[0]
         visitados.append(expand)
         nodos[findPadre(expand,nodos)][2] = 1
+        print(expand[0],expand[1])
         if int(mapa[expand[0]][expand[1]]) == 4: # es meta?
             break
         """if int(mapa[expand[0]][expand[1]]) == 3:
@@ -254,10 +255,11 @@ def returnPath(algoritmo):
         return list(reversed(rPath))
 
 if __name__ == '__main__':
-    a = iterativa()
-    #print(returnPath(3))
+    #a = 0
+    #a = iterativa()
+    print(returnPath(2))
     #print(arbol)
-    print(a)
+    #print(a)
     """for i in a:
         print(i)
         input()"""
