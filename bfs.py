@@ -77,7 +77,7 @@ def bfs():
     cola = deque()
     visitados = list()
     nodos = list()
-    makemapa()
+    #makemapa()
     x,y = findElement("5")
     hijos =list()
     cola.append([x,y])
@@ -106,7 +106,7 @@ def costoUniforme():
     cola = queue.PriorityQueue()
     visitados = list()
     nodos = list()
-    makemapa()
+    #makemapa()
     x,y = findElement("5")
     hijos = list()
     cola.put((0,[x,y]))
@@ -189,12 +189,12 @@ def iterativa():
     cola.append([x,y])
     visitados = list()
     arboles.append([])
-    profundidad = -1
-    find = 0
+    profundidad = 0
+    find = 2
     Nodo = nodo.Nodo(list(),[x,y],0)
     nodos.append(Nodo.makenodo())
     while not find:
-        profundidad += 1
+        #profundidad += 1
         profAux = profundidad
         while len(cola) != 0 and profAux >=0:
             expand = cola.popleft()
@@ -217,13 +217,16 @@ def iterativa():
                             arbol.append(arbol_.makenodo())"""
                             nodo_ = nodo.Nodo(nodos[findPadre(expand,nodos)],hijos[i],0)
                             nodos.append(nodo_.makenodo())
+            profAux -= 1
         cola = deque()
         cola.append([x,y])
         visitados = list()
         nodos = list()
         Nodo = nodo.Nodo(list(),[x,y],0)
         nodos.append(Nodo.makenodo())
-    return nodos
+
+        find = 1
+    return arboles
 
 def returnPath(algoritmo):
     global path
@@ -240,6 +243,7 @@ def returnPath(algoritmo):
         findPath(nodoMeta)
         rPath = path
         path = list()
+        #print(rPath)
         return list(reversed(rPath))
     if algoritmo == 3:
         nodos = iterativa()
