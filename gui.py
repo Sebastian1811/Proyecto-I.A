@@ -12,7 +12,7 @@ y=0
 screen = pygame.display.set_mode(size,pygame.RESIZABLE)
 #bfs.makemapa()
 mapa = bfs.mapa
-camino = bfs.returnPath(1)
+camino = bfs.returnPath(2)
 Mononoke = pygame.image.load("mononoke.png")
 Mononoke = pygame.transform.scale(Mononoke, (100, 100))
 Ciervo = pygame.image.load("ciervo.png")
@@ -26,7 +26,7 @@ Xamongus = 0
 Yamongus = 0
 
 
-def Guiar_Mononoke(camino):
+"""def Guiar_Mononoke(camino):
     global Xamongus
     global Yamongus
     pintarmapa()
@@ -38,20 +38,14 @@ def Guiar_Mononoke(camino):
         Xamongus = x1
         Yamongus = y1
         pintarmapa()
-        time.sleep(5)
-
-         
-
-            
-
-
+        time.sleep(5)        """
 """def Movimientos():
     if event.type == pygame.KEYDOWN:
         try:
             contenido = mapa[(int(Xamongus)-1)][int(Yamongus)]
             if contenido != "0"and not int(Xamongus) <=0 :
                 mapa[int(Xamongus)][int(Yamongus)]="1"
-                mapa[(int(Xamongus)-1)][int(Yamongus)]="5"      
+                mapa[(int(Xamongus)-1)][int(Yamongus)]="5"
             if event.key == pygame.K_DOWN:
                 contenido = mapa[(int(Xamongus)+1)][int(Yamongus)]
                 if contenido != "0" and not int(Xamongus) >= 3:
@@ -100,25 +94,20 @@ def pintarmapa():
         x=0
         y+=121
 
-
+i = 0
+j = 0
 while 1:
     screen.fill(black)
-    
+    pintarmapa()
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT: sys.exit()
 
-    #input()
-    if Xamongus != 0 and Yamongus !=4:
-        Guiar_Mononoke(camino)
-        print(mapa)
-        print(Xamongus,",",Yamongus)
-    pintarmapa()
-    
-    #Movimientos()
-
-
-
-    #pintar mapa
-
-
+    if Xamongus >= 0 and Yamongus <= 4 and i < len(camino):
+        mapa[Xamongus][Yamongus] = '1'
+        Xamongus = camino[i][0]
+        Yamongus = camino[i][1]
+        mapa[Xamongus][Yamongus] = '5'
+        i += 1
+    time.sleep(0.5)
     pygame.display.flip()
