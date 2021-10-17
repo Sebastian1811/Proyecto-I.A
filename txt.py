@@ -7,7 +7,9 @@ def leerTxt(name):
         mapa += file.readline()
         veces -= 1
     file.close()
-    return mapa
+    mapa_ = mapa
+    mapa = ''
+    return mapa_
 
 def returnFilas():
     fichero = open('mapa.txt','r')

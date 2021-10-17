@@ -10,8 +10,9 @@ black = (0,0,0)
 x=0
 y=0
 screen = pygame.display.set_mode(size,pygame.RESIZABLE)
+bfs.makemapa()
 mapa = bfs.mapa
-camino = bfs.returnPath(1)
+#camino = bfs.returnPath(1)
 Mononoke = pygame.image.load("mononoke.png")
 Mononoke = pygame.transform.scale(Mononoke, (100, 100))
 Ciervo = pygame.image.load("ciervo.png")
@@ -27,17 +28,36 @@ Aviso_ProfundidadI= Fuente.render("Para Profundidad Iterativa presione la tecla 
 count = 0
 Xamongus = 0
 Yamongus = 0
-
+amplitud = 0
+costo = 0
+reinicio = 0
+i = 0
 def Eventos_teclado():
+    global mapa
     global camino
+    global costo
+    global amplitud
+    global reinicio
+    global i
     if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_q:
+            amplitud = 1
             camino = bfs.returnPath(1)
-            print("Si entro")
         if event.key == pygame.K_w:
+            costo = 1
             camino = bfs.returnPath(2)
-            print("si entro")
-    
+        if event.key == pygame.K_r:
+            amplitud = 0
+            costo = 0
+            i = 0
+            #reinicio = 1
+            mapa = list()
+            bfs.mapa = list()
+            bfs.mapaString =''
+            bfs.makemapa()
+            camino = list()
+            mapa = bfs.mapa
+            #reinicio = 0
 
 
 def pintarmapa():
@@ -70,7 +90,6 @@ def pintarmapa():
         x=0
         y+=121
 
-i = 0
 def guiarMononoke():
     global i
     global Xamongus
@@ -81,19 +100,24 @@ def guiarMononoke():
         Yamongus = camino[i][1]
         mapa[Xamongus][Yamongus] = '5'
         i += 1
-      
 
 while 1:
     screen.fill(black)
     pintarmapa()
-
     for event in pygame.event.get():
         if event.type == pygame.QUIT: sys.exit()
         Eventos_teclado()
-    guiarMononoke()
+    #print("no en eventos con amp",amplitud)
+    if amplitud:
+        guiarMononoke()
+        #camino = list()
+    if costo:
+        guiarMononoke()
+        #camino = list()
+
     time.sleep(0.5)
     screen.blit(Aviso_Amplitud,(40,510))
     screen.blit(Aviso_CostoU,(40,550))
     screen.blit(Aviso_ProfundidadI,(40,600))
-    
+
     pygame.display.flip()
