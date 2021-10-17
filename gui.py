@@ -11,8 +11,8 @@ x=0
 y=0
 screen = pygame.display.set_mode(size,pygame.RESIZABLE)
 #bfs.makemapa()
-mapa = bfs.mapa
-camino = bfs.returnPath(2)
+#mapa = bfs.mapa
+camino = 0 #bfs.returnPath(2)
 Mononoke = pygame.image.load("mononoke.png")
 Mononoke = pygame.transform.scale(Mononoke, (100, 100))
 Ciervo = pygame.image.load("ciervo.png")
@@ -96,18 +96,23 @@ def pintarmapa():
 
 i = 0
 j = 0
-while 1:
-    screen.fill(black)
-    pintarmapa()
-
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT: sys.exit()
-
+def guiarMononoke():
+    global i
+    global Xamongus
+    global Yamongus
     if Xamongus >= 0 and Yamongus <= 4 and i < len(camino):
         mapa[Xamongus][Yamongus] = '1'
         Xamongus = camino[i][0]
         Yamongus = camino[i][1]
         mapa[Xamongus][Yamongus] = '5'
         i += 1
+while 1:
+    screen.fill(black)
+    pintarmapa()
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT: sys.exit()
+    guiarMononoke()
+
     time.sleep(0.5)
     pygame.display.flip()
