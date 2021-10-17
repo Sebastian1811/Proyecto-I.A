@@ -99,13 +99,15 @@ def findPath(nodo):
 
 def costoUniforme():
     costoAcumulado = 0
-    #ciervo = false
     cola = queue.PriorityQueue()
     visitados = list()
+    nodos = list()
     makemapa()
     x,y = findElement("5")
     hijos = list()
     cola.put((0,[x,y]))
+    Nodo = nodo.Nodo(list(),[x,y],0)
+    nodos.append(Nodo.makenodo())
     xv,yv = findElement("3")
     tuplaCiervo =[xv,yv]
     while cola is not cola.empty():
@@ -114,6 +116,7 @@ def costoUniforme():
         costoAcumulado = expandL[0]
         colaDibujo.append(expand)
         visitados.append(expand)
+        nodos[findPadre(expand,nodos)][2] = 1
         if int(mapa[expand[0]][expand[1]]) == 4: # es meta?
             #print(expand[0]," ",expand[1])
             break
@@ -126,11 +129,18 @@ def costoUniforme():
                     tupla = hijos[i]
                     if int(mapa[tupla[0]][tupla[1]]) == 4 :
                         cola.put((1+costoAcumulado,hijos[i]))
+                        nodo_ = nodo.Nodo(nodos[findPadre(expand,nodos)],hijos[i],0)
+                        nodos.append(nodo_.makenodo())
                     if int(mapa[tupla[0]][tupla[1]]) == 3 :
                         #ciervo = 1
                         cola.put((1+costoAcumulado,hijos[i]))
+                        nodo_ = nodo.Nodo(nodos[findPadre(expand,nodos)],hijos[i],0)
+                        nodos.append(nodo_.makenodo())
                     if int(mapa[tupla[0]][tupla[1]]) != 0 and int(mapa[tupla[0]][tupla[1]]) != 3 and int(mapa[tupla[0]][tupla[1]]) != 4 : # no deberia mirar muros xd
                         cola.put((int(mapa[tupla[0]][tupla[1]])+costoAcumulado,hijos[i])) #hijos en cola
+                        nodo_ = nodo.Nodo(nodos[findPadre(expand,nodos)],hijos[i],0)
+                        nodos.append(nodo_.makenodo())
+    return nodos
 def profundidadIterativa():
     cola = deque()
     hijos = list()
@@ -176,7 +186,7 @@ def returnPath(algoritmo):
         findPath(nodoMeta)
         rPath = path
         path = list()
-        return list(reversed(Rpath))
+        return list(reversed(rPath))
     if algoritmo == 3:
         nodos = costoUniforme()
         nodoMeta = findBranch(nodos)
@@ -186,4 +196,4 @@ def returnPath(algoritmo):
         return list(reversed(rPath))
 
 if __name__ == '__main__':
-    print(returnPath(1))
+    print(returnPath(2))
