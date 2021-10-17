@@ -25,6 +25,7 @@ Fuente = pygame.font.Font(None,20)
 Aviso_Amplitud= Fuente.render("Para Amplitud presione la tecla Q",True,(200,60,80))
 Aviso_CostoU= Fuente.render("Para Costo uniforme presione la tecla W",True,(135,200,80))
 Aviso_ProfundidadI= Fuente.render("Para Profundidad Iterativa presione la tecla E",True,(100,120,200))
+Aviso_Reinicio= Fuente.render("Para Reiniciar el programa presione la tecla R",True,(200,200,200))
 count = 0
 Xamongus = 0
 Yamongus = 0
@@ -116,8 +117,9 @@ while 1:
         #camino = list()
 
     time.sleep(0.5)
-    screen.blit(Aviso_Amplitud,(40,510))
-    screen.blit(Aviso_CostoU,(40,550))
-    screen.blit(Aviso_ProfundidadI,(40,600))
+    screen.blit(Aviso_Amplitud,(40,500))
+    screen.blit(Aviso_CostoU,(40,540))
+    screen.blit(Aviso_ProfundidadI,(40,580))
+    screen.blit(Aviso_Reinicio,(40,620))
 
     pygame.display.flip()
