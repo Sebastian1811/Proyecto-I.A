@@ -9,6 +9,32 @@ black = (0,0,0)
 x=0
 y=0
 
+def Movimientos():
+    if event.type == pygame.KEYDOWN:
+        try:
+            contenido = mapa[(int(Xamongus)-1)][int(Yamongus)]
+            if contenido != "0"and not int(Xamongus) <=0 :
+                mapa[int(Xamongus)][int(Yamongus)]="1"
+                mapa[(int(Xamongus)-1)][int(Yamongus)]="5"      
+            if event.key == pygame.K_DOWN:
+                contenido = mapa[(int(Xamongus)+1)][int(Yamongus)]
+                if contenido != "0" and not int(Xamongus) >= 3:
+                        mapa[int(Xamongus)][int(Yamongus)]="1"
+                        mapa[int(Xamongus)+1][int(Yamongus)]="5"
+            if event.key == pygame.K_LEFT:
+                contenido = mapa[(int(Xamongus))][int(Yamongus)-1]
+                if contenido != "0" and not int(Yamongus) <= 0:
+                        mapa[int(Xamongus)][int(Yamongus)]="1"
+                        mapa[int(Xamongus)][int(Yamongus)-1]="5"
+            if event.key == pygame.K_RIGHT:
+                contenido = mapa[(int(Xamongus))][int(Yamongus)+1]
+                if contenido != "0" and not int(Yamongus) >= 4:
+                        mapa[int(Xamongus)][int(Yamongus)]="1"
+                        mapa[int(Xamongus)][int(Yamongus)+1]="5"
+        except Exception as inst:
+            print("amongus no tiene mas espacio")
+   
+
 screen = pygame.display.set_mode(size,pygame.RESIZABLE)
 bfs.makemapa()
 mapa = bfs.mapa
@@ -56,30 +82,7 @@ while 1:
     for event in pygame.event.get():
         if event.type == pygame.QUIT: sys.exit()
 
-        elif event.type == pygame.KEYDOWN:
-            try:
-                if event.key == pygame.K_UP:
-                    contenido = mapa[(int(Xamongus)-1)][int(Yamongus)]
-                    if contenido != "0" and not int(Xamongus) <=0 :
-                        mapa[int(Xamongus)][int(Yamongus)]="1"
-                        mapa[(int(Xamongus)-1)][int(Yamongus)]="5"      
-                if event.key == pygame.K_DOWN:
-                    contenido = mapa[(int(Xamongus)+1)][int(Yamongus)]
-                    if contenido != "0" and not int(Xamongus) >= 3:
-                        mapa[int(Xamongus)][int(Yamongus)]="1"
-                        mapa[int(Xamongus)+1][int(Yamongus)]="5"
-                if event.key == pygame.K_LEFT:
-                    contenido = mapa[(int(Xamongus))][int(Yamongus)-1]
-                    if contenido != "0" and not int(Yamongus) <= 0:
-                        mapa[int(Xamongus)][int(Yamongus)]="1"
-                        mapa[int(Xamongus)][int(Yamongus)-1]="5"
-                if event.key == pygame.K_RIGHT:
-                    contenido = mapa[(int(Xamongus))][int(Yamongus)+1]
-                    if contenido != "0" and not int(Yamongus) >= 4:
-                        mapa[int(Xamongus)][int(Yamongus)]="1"
-                        mapa[int(Xamongus)][int(Yamongus)+1]="5"
-            except Exception as inst:
-                print("amongus no tiene mas espacio")
+        Movimientos()
 
 
 
