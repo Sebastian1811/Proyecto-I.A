@@ -26,10 +26,10 @@ def findPadre(tupla,lista):
         if i[1] == tupla:
             return lista.index(i)
 
-def findBranch(lista):
+def findBranch(lista,meta):
     branch = 0
     for i in lista:
-        if i[2]:
+        if i[2] and meta == i[1]:
             branch = i
     return branch
 
@@ -118,7 +118,7 @@ def costoUniforme():
         costoAcumulado = expandL[0]
         visitados.append(expand)
         nodos[findPadre(expand,nodos)][2] = 1
-        print(expand[0],expand[1])
+        #print(expand[0],expand[1])
         if int(mapa[expand[0]][expand[1]]) == 4: # es meta?
             break
         """if int(mapa[expand[0]][expand[1]]) == 3:
@@ -233,14 +233,16 @@ def returnPath(algoritmo):
     global path
     if algoritmo == 1:
         nodos = bfs()
-        nodoMeta = findBranch(nodos)
+        x,y = findElement('4')
+        nodoMeta = findBranch(nodos,[x,y])
         findPath(nodoMeta)
         rPath = path
         path = list()
         return list(reversed(rPath))
     if algoritmo == 2:
         nodos = costoUniforme()
-        nodoMeta = findBranch(nodos)
+        x,y = findElement('4')
+        nodoMeta = findBranch(nodos,[x,y])
         findPath(nodoMeta)
         rPath = path
         path = list()
