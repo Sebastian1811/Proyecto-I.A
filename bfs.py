@@ -147,90 +147,33 @@ def costoUniforme():
                         nodo_ = nodo.Nodo(nodos[findPadre(expand,nodos)],hijos[i],0)
                         nodos.append(nodo_.makenodo())
     return nodos
-"""def profundidadIterativa():
-    cola = deque()
-    hijos = list()
-    makemapa()
-    x,y = findElement("5")
-    cola.append([x,y])
-    visitados = list()
-    profundidad = -1
-    find = 0
-    while not find:
-        profundidad +=1
-        profAux = profundidad
-        while len(cola) != 0 and profAux >= 0:
-            expand = cola.popleft()
-            visitados.append(expand)
-            if int(mapa[expand[0]][expand[1]]) == 4: # es meta?
-                #print(expand[0]," ",expand[1])
-                find = 1
-                break
-            hijos = hijosNodo([expand[0],expand[1]]) # creo los hijos
-            #print(len(hijos))
-            for i in range(len(hijos)):
-                if hijos[i] not in visitados: #no me devuelvo
-                    tupla = hijos[i]
-                    if int(mapa[tupla[0]][tupla[1]]) != 0: # no deberia mirar muros xd
-                        cola.append(hijos[i]) #hijos en cola
-            profAux -=1
-        cola = deque()
-        cola.append([x,y])
-        visitados = list()"""
+visitados = list()
+def BPI(raiz,objetivo):
+    profundidad = 0
+    global visitados
+    while 1:
+        resultado = bpl(raiz,objetivo,profundidad)
+        if resultado == objetivo:
+            return resultado
+        profundidad += 1
 
-
-
-def iterativa():
-    cola = deque()
-    hijos = list()
-    arboles = list()
-    nodos = list()
-    makemapa()
-    x,y = findElement("5")
-    cola.append([x,y])
-    visitados = list()
-    arboles.append([])
-    profundidad = 1
-    find = 2
-    Nodo = nodo.Nodo(list(),[x,y],0)
-    nodos.append(Nodo.makenodo())
-    while not find:
-        #profundidad += 1
-        profAux = profundidad
-        while len(cola) != 0 and profAux >=0:
-            expand = cola.popleft()
-            visitados.append(expand)
-            nodos[findPadre(expand,nodos)][2] = 1
-            #arbol_ = nodo.Nodo(arboles[len(arboles)-1],expand,1)
-            #arboles.append(arbol_.makenodo())
-            if int(mapa[expand[0]][expand[1]]) == 4:
-                find = 1
-                break
-            profAux -=1
-            if profAux >= 0:
-                hijos = hijosNodo([expand[0],expand[1]])
-                for i in range(len(hijos)):
-                    if hijos[i] not in visitados: #no me devuelvo
-                        tupla = hijos[i]
-                        if int(mapa[tupla[0]][tupla[1]]) != 0: # no deberia mirar muros xd
-                            cola.append(hijos[i]) #hijos en cola
-                            """arbol_ = nodo.Nodo(arboles[len(arboles)-1],expand,1)
-                            arbol.append(arbol_.makenodo())"""
-                            nodo_ = nodo.Nodo(nodos[findPadre(expand,nodos)],hijos[i],0)
-                            nodos.append(nodo_.makenodo())
-            #profAux -= 1
-        profundidad-= 1
-        cola = deque()
-        cola.append([x,y])
-        visitados = list()
-        arboles.append(nodos)
-        nodos = list()
-        Nodo = nodo.Nodo(list(),[x,y],0)
-        nodos.append(Nodo.makenodo())
-        if not profundidad:
-            find = 1
-    return arboles
-
+def bpl (nodo,objetivo, profundidad):
+    global visitados
+    global path
+    if profundidad == 0 and nodo == objetivo:
+        path.append(nodo)
+        return nodo
+    elif profundidad > 0:
+        hijos = hijosNodo(nodo)
+        visitados.append(nodo)
+        for i in hijos:
+            if int(mapa[i[0]][i[1]]) != 0:
+                resultado = bpl([i[0],i[1]],objetivo,profundidad-1)
+                if resultado != None:
+                    path.append(nodo)
+                    return resultado
+    else:
+        return None
 def returnPath(algoritmo):
     global path
     if algoritmo == 1:
@@ -248,23 +191,15 @@ def returnPath(algoritmo):
         findPath(nodoMeta)
         rPath = path
         path = list()
-        #print(rPath)
         return list(reversed(rPath))
     if algoritmo == 3:
-        nodos = iterativa()
-        x,y = findElement('4')
-        nodoMeta = findBranch(nodos,[x,y])
-        findPath(nodoMeta)
+        xprincesa,yprincesa = findElement('5')
+        xllegada, yllegada =findElement('4')
+        BPI([xprincesa,yprincesa],[xllegada, yllegada])
         rPath = path
         path = list()
         return list(reversed(rPath))
 
 if __name__ == '__main__':
-    #a = 0
-    #a = iterativa()
-    print(iterativa())
-    #print(arbol)
-    #print(a)
-    """for i in a:
-        print(i)
-        input()"""
+    makemapa()
+    print(returnPath(3))
