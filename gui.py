@@ -33,9 +33,11 @@ amplitud = 0
 profundidad = 0
 costo = 0
 reinicio = 0
+estadofinal = 0
 i = 0
 def Eventos_teclado():
     global mapa
+    global estadofinal
     global camino
     global costo
     global amplitud
@@ -43,21 +45,24 @@ def Eventos_teclado():
     global reinicio
     global i
     if event.type == pygame.KEYDOWN:
-        if event.key == pygame.K_q:
+        if event.key == pygame.K_q and not estadofinal:
             amplitud = 1
+            estadofinal = 1
             camino = bfs.returnPath(1)
-        if event.key == pygame.K_w:
+        if event.key == pygame.K_w and not estadofinal:
             costo = 1
+            estadofinal = 1
             camino = bfs.returnPath(2)
-        if event.key == pygame.K_e:
+        if event.key == pygame.K_e and not estadofinal:
             profundidad = 1
+            estadofinal = 1
             camino = bfs.returnPath(3)
-        if event.key == pygame.K_r:
+        if event.key == pygame.K_r :
             amplitud = 0
             costo = 0
             profundidad = 0
             i = 0
-            #reinicio = 1
+            estadofinal = 0
             mapa = list()
             bfs.mapa = list()
             bfs.mapaString =''
