@@ -3,15 +3,15 @@ import txt
 import queue
 import nodo
 
-mapa= list()
-mapaString=''
+
 path = list()
 arbol = list()
 visitados = list()
 def makemapa():
     fila = ''
     count = 0
-    global mapaString
+    mapa= list()
+    mapaString=''
     mapaString = txt.leerTxt('mapa.txt')
     for i in range(len(mapaString)):
         if mapaString[i] == "\n":
@@ -20,6 +20,7 @@ def makemapa():
             count+=1
         if mapaString[i] != "\n" and mapaString[i] !=" ":
             fila += mapaString[i]
+    return mapa
 
 def findPadre(tupla,lista):
     for i in lista:
@@ -42,7 +43,7 @@ def findPath(nodo):
         path.append(nodo[1])
         findPath(nodo[0])
 
-def findElement(element):
+def findElement(element,mapa):
     x = 0
     y = 0
     for i in range(len(mapa)):
@@ -52,7 +53,7 @@ def findElement(element):
                 y = j
     return x,y
 
-def hijosNodo(nodo):
+def hijosNodo(nodo,mapa):
     hijos = list()
     if nodo[0]+1 < len(mapa):
         hijos.append([nodo[0]+1,nodo[1]])
@@ -72,13 +73,13 @@ def refactorMapa():
         for j in range(len(mapa[0])):
             if mapa[i][j] == "2":
                 mapa[i][j] = "1"
-def bfs():
+def bfs(mapa):
     global arbol
     cola = deque()
     visitados = list()
     nodos = list()
     #makemapa()
-    x,y = findElement("5")
+    x,y = findElement("5",mapa)
     hijos =list()
     cola.append([x,y])
     Nodo = nodo.Nodo(list(),[x,y],0)
@@ -89,7 +90,7 @@ def bfs():
         nodos[findPadre(expand,nodos)][2] = 1
         if int(mapa[expand[0]][expand[1]]) == 4: # es meta?
             break
-        hijos = hijosNodo([expand[0],expand[1]]) # creo los hijos
+        hijos = hijosNodo([expand[0],expand[1]],mapa) # creo los hijos
         for i in range(len(hijos)):
             if hijos[i] not in visitados: #no me devuelvo
                 tupla = hijos[i]
@@ -101,13 +102,13 @@ def bfs():
                     nodos.append(nodo_.makenodo())
     return nodos
 
-def costoUniforme():
+def costoUniforme(mapa):
     costoAcumulado = 0
     cola = queue.PriorityQueue()
     visitados = list()
     nodos = list()
     #makemapa()
-    x,y = findElement("5")
+    x,y = findElement("5",mapa)
     hijos = list()
     cola.put((0,[x,y]))
     Nodo = nodo.Nodo(list(),[x,y],0)
@@ -123,7 +124,7 @@ def costoUniforme():
             break
         """if int(mapa[expand[0]][expand[1]]) == 3:
             #refactorMapa()"""
-        hijos = hijosNodo([expand[0],expand[1]]) # creo los hijos
+        hijos = hijosNodo([expand[0],expand[1]],mapa) # creo los hijos
         if len(hijos) != 0:
             for i in range(len(hijos)):
                 if hijos[i] not in visitados: #no me devuelvo
@@ -148,58 +149,58 @@ def costoUniforme():
                         nodos.append(nodo_.makenodo())
     return nodos
 
-def BPI(raiz,objetivo):
+def BPI(raiz,objetivo,mapa):
     profundidad = 0
     global visitados
     while 1:
-        resultado = bpl(raiz,objetivo,profundidad)
+        resultado = bpl(raiz,objetivo,profundidad,mapa)
         if resultado == objetivo:
             return resultado
         profundidad += 1
 
-def bpl (nodo,objetivo, profundidad):
+def bpl (nodo,objetivo, profundidad,mapa):
     global visitados
     global path
     if profundidad == 0 and nodo == objetivo:
         path.append(nodo)
         return nodo
     elif profundidad > 0:
-        hijos = hijosNodo(nodo)
+        hijos = hijosNodo(nodo,mapa)
         visitados.append(nodo)
         for i in hijos:
             if int(mapa[i[0]][i[1]]) != 0:
-                resultado = bpl([i[0],i[1]],objetivo,profundidad-1)
+                resultado = bpl([i[0],i[1]],objetivo,profundidad-1,mapa)
                 if resultado != None:
                     path.append(nodo)
                     return resultado
     else:
         return None
-def returnPath(algoritmo):
+def returnPath(algoritmo,mapa):
     global path
     if algoritmo == 1:
-        nodos = bfs()
-        x,y = findElement('4')
+        nodos = bfs(mapa)
+        x,y = findElement('4',mapa)
         nodoMeta = findBranch(nodos,[x,y])
         findPath(nodoMeta)
         rPath = path
         path = list()
         return list(reversed(rPath))
     if algoritmo == 2:
-        nodos = costoUniforme()
-        x,y = findElement('4')
+        nodos = costoUniforme(mapa)
+        x,y = findElement('4',mapa)
         nodoMeta = findBranch(nodos,[x,y])
         findPath(nodoMeta)
         rPath = path
         path = list()
         return list(reversed(rPath))
     if algoritmo == 3:
-        xprincesa,yprincesa = findElement('5')
-        xllegada, yllegada =findElement('4')
-        BPI([xprincesa,yprincesa],[xllegada, yllegada])
+        xprincesa,yprincesa = findElement('5',mapa)
+        xllegada, yllegada =findElement('4',mapa)
+        BPI([xprincesa,yprincesa],[xllegada, yllegada],mapa)
         rPath = path
         path = list()
         return list(reversed(rPath))
 
 if __name__ == '__main__':
-    makemapa()
-    print(returnPath(3))
+
+    print(returnPath(3,makemapa()))
