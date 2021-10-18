@@ -33,10 +33,12 @@ princesaMononoke = agente.agente('Mononoke')
 princesaMononoke.setPercepcion()
 
 def Eventos_teclado():
+
     global estadofinal
     global costo
     global amplitud
     global profundidad
+
     if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_q and not estadofinal:
             amplitud = 1
@@ -60,9 +62,11 @@ def Eventos_teclado():
             princesaMononoke.setPercepcion()
 
 def pintarmapa():
+
     x=0
     y=0
     mapa = princesaMononoke.percepcion
+    
     for fila in range(len(mapa)):
         for  columna in range(len(mapa[0])):
             if mapa[fila][columna] == "0":
