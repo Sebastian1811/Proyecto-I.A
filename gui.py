@@ -119,16 +119,12 @@ while 1:
     for event in pygame.event.get():
         if event.type == pygame.QUIT: sys.exit()
         Eventos_teclado()
-    #print("no en eventos con amp",amplitud)
     if amplitud:
         guiarMononoke()
-        #camino = list()
     if costo:
         guiarMononoke()
-        #camino = list()
     if profundidad:
         guiarMononoke()
-        #camino = list()
 
     time.sleep(0.5)
     screen.blit(Aviso_Amplitud,(40,500))
