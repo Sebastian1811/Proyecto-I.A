@@ -1,5 +1,6 @@
 import sys, pygame
 import time
+import agente
 import bfs
 pygame.init()
 
@@ -10,9 +11,6 @@ black = (0,0,0)
 x=0
 y=0
 screen = pygame.display.set_mode(size,pygame.RESIZABLE)
-bfs.makemapa()
-mapa = bfs.mapa
-#camino = bfs.returnPath(1)
 Mononoke = pygame.image.load("mononoke.png")
 Mononoke = pygame.transform.scale(Mononoke, (100, 100))
 Ciervo = pygame.image.load("ciervo.png")
@@ -28,57 +26,44 @@ Aviso_ProfundidadI= Fuente.render("Para Profundidad Iterativa presione la tecla 
 Aviso_Reinicio= Fuente.render("Para Reiniciar el programa presione la tecla R",True,(200,200,200))
 Musica = pygame.mixer.music.load("music.mp3")
 Musica=pygame.mixer.music.play(10)
-count = 0
-Xamongus = 0
-Yamongus = 0
 amplitud = 0
 profundidad = 0
 costo = 0
-reinicio = 0
 estadofinal = 0
-i = 0
+princesaMononoke = agente.agente('Mononoke')
+princesaMononoke.setPercepcion()
+
 def Eventos_teclado():
-    global mapa
     global estadofinal
-    global camino
     global costo
     global amplitud
     global profundidad
-    global reinicio
-    global i
     if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_q and not estadofinal:
             amplitud = 1
             estadofinal = 1
-            camino = bfs.returnPath(1)
+            princesaMononoke.setActuacion(1)
         if event.key == pygame.K_w and not estadofinal:
             costo = 1
             estadofinal = 1
-            camino = bfs.returnPath(2)
+            princesaMononoke.setActuacion(2)
         if event.key == pygame.K_e and not estadofinal:
             profundidad = 1
             estadofinal = 1
-            camino = bfs.returnPath(3)
+            princesaMononoke.setActuacion(3)
         if event.key == pygame.K_r :
             amplitud = 0
             costo = 0
             profundidad = 0
-            i = 0
+            princesaMononoke.setMovimientos()
             estadofinal = 0
-            mapa = list()
-            bfs.mapa = list()
-            bfs.mapaString =''
-            bfs.makemapa()
-            camino = list()
-            mapa = bfs.mapa
-            #reinicio = 0
-
+            princesaMononoke.percepcion = list()
+            princesaMononoke.setPercepcion()
 
 def pintarmapa():
     x=0
     y=0
-    global Xamongus
-    global Yamongus
+    mapa = princesaMononoke.percepcion
     for fila in range(len(mapa)):
         for  columna in range(len(mapa[0])):
             if mapa[fila][columna] == "0":
@@ -86,8 +71,6 @@ def pintarmapa():
                 x+=121
             if mapa[fila][columna] == "5":
                 screen.blit(Mononoke,[x,y])
-                Xamongus = fila
-                Yamongus = columna
                 x+=121
             if mapa[fila][columna] == "3":
                 screen.blit(Ciervo,[x,y])
@@ -104,17 +87,6 @@ def pintarmapa():
         x=0
         y+=121
 
-def guiarMononoke():
-    global i
-    global Xamongus
-    global Yamongus
-    if Xamongus >= 0 and Yamongus <= 4 and i < len(camino):
-        mapa[Xamongus][Yamongus] = '1'
-        Xamongus = camino[i][0]
-        Yamongus = camino[i][1]
-        mapa[Xamongus][Yamongus] = '5'
-        i += 1
-
 while 1:
     screen.fill(black)
     pintarmapa()
@@ -122,16 +94,14 @@ while 1:
         if event.type == pygame.QUIT: sys.exit()
         Eventos_teclado()
     if amplitud:
-        guiarMononoke()
+        princesaMononoke.movimiento()
     if costo:
-        guiarMononoke()
+        princesaMononoke.movimiento()
     if profundidad:
-        guiarMononoke()
-
+        princesaMononoke.movimiento()
     time.sleep(0.5)
     screen.blit(Aviso_Amplitud,(40,500))
     screen.blit(Aviso_CostoU,(40,540))
     screen.blit(Aviso_ProfundidadI,(40,580))
     screen.blit(Aviso_Reinicio,(40,620))
-
     pygame.display.flip()
