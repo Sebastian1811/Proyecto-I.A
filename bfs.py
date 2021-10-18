@@ -7,7 +7,7 @@ mapa= list()
 mapaString=''
 path = list()
 arbol = list()
-
+visitados = list()
 def makemapa():
     fila = ''
     count = 0
@@ -147,7 +147,7 @@ def costoUniforme():
                         nodo_ = nodo.Nodo(nodos[findPadre(expand,nodos)],hijos[i],0)
                         nodos.append(nodo_.makenodo())
     return nodos
-visitados = list()
+
 def BPI(raiz,objetivo):
     profundidad = 0
     global visitados
