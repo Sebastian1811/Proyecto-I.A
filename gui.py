@@ -30,6 +30,7 @@ count = 0
 Xamongus = 0
 Yamongus = 0
 amplitud = 0
+profundidad = 0
 costo = 0
 reinicio = 0
 i = 0
@@ -38,6 +39,7 @@ def Eventos_teclado():
     global camino
     global costo
     global amplitud
+    global profundidad
     global reinicio
     global i
     if event.type == pygame.KEYDOWN:
@@ -47,9 +49,13 @@ def Eventos_teclado():
         if event.key == pygame.K_w:
             costo = 1
             camino = bfs.returnPath(2)
+        if event.key == pygame.K_e:
+            profundidad = 1
+            camino = bfs.returnPath(3)
         if event.key == pygame.K_r:
             amplitud = 0
             costo = 0
+            profundidad = 0
             i = 0
             #reinicio = 1
             mapa = list()
@@ -113,6 +119,9 @@ while 1:
         guiarMononoke()
         #camino = list()
     if costo:
+        guiarMononoke()
+        #camino = list()
+    if profundidad:
         guiarMononoke()
         #camino = list()
 
