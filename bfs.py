@@ -3,10 +3,10 @@ import txt
 import queue
 import nodo
 
-
 path = list()
 arbol = list()
 visitados = list()
+
 def makemapa():
     fila = ''
     count = 0

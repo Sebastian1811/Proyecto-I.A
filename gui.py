@@ -1,9 +1,8 @@
 import sys, pygame
 import time
 import agente
-import bfs
-pygame.init()
 
+pygame.init()
 size = width, height = 620, 650
 white = 255, 255, 255
 red = (255,0,0)
