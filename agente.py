@@ -1,12 +1,15 @@
 import bfs
+
 class agente:
-    percepcion = 0
-    actuacion = 0
+    
+    percepcion = list()
+    actuacion = list()
     posx = 0
     posy = 0
-    meta = 0
+    meta = list()
     movimientosRealizados = 0
     nombre = ''
+
     def __init__(self,nombre):
         self.nombre = nombre
 
@@ -25,7 +28,6 @@ class agente:
 
     def movimiento(self):
         if self.posx >= self.meta[0] and self.posy <= self.meta[1] and self.movimientosRealizados < len(self.actuacion):
-            print(self.posx,self.posy)
             self.percepcion[self.posx][self.posy] = '1'
             self.posx = self.actuacion[self.movimientosRealizados][0]
             self.posy = self.actuacion[self.movimientosRealizados][1]
