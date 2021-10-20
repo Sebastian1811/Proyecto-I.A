@@ -89,21 +89,22 @@ def pintarmapa():
                 x+=121
         x=0
         y+=121
-while 1:
-    screen.fill(black)
-    pintarmapa()
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT: sys.exit()
-        Eventos_teclado()
-    if amplitud:
-        princesaMononoke.movimiento()
-    if costo:
-        princesaMononoke.movimiento()
-    if profundidad:
-        princesaMononoke.movimiento()
-    time.sleep(0.5)
-    screen.blit(Aviso_Amplitud,(40,500))
-    screen.blit(Aviso_CostoU,(40,540))
-    screen.blit(Aviso_ProfundidadI,(40,580))
-    screen.blit(Aviso_Reinicio,(40,620))
-    pygame.display.flip()
+if __name__ != '__main__':
+    while 1:
+        screen.fill(black)
+        pintarmapa()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT: sys.exit()
+            Eventos_teclado()
+        if amplitud:
+            princesaMononoke.movimiento()
+        if costo:
+            princesaMononoke.movimiento()
+        if profundidad:
+            princesaMononoke.movimiento()
+        time.sleep(0.5)
+        screen.blit(Aviso_Amplitud,(40,500))
+        screen.blit(Aviso_CostoU,(40,540))
+        screen.blit(Aviso_ProfundidadI,(40,580))
+        screen.blit(Aviso_Reinicio,(40,620))
+        pygame.display.flip()
