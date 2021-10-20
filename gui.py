@@ -66,7 +66,7 @@ def pintarmapa():
     x=0
     y=0
     mapa = princesaMononoke.percepcion
-    
+
     for fila in range(len(mapa)):
         for  columna in range(len(mapa[0])):
             if mapa[fila][columna] == "0":
@@ -89,7 +89,6 @@ def pintarmapa():
                 x+=121
         x=0
         y+=121
-
 while 1:
     screen.fill(black)
     pintarmapa()
