@@ -89,7 +89,7 @@ def pintarmapa():
                 x+=121
         x=0
         y+=121
-if __name__ == '__main__':
+if __name__ != '__main__':
     while 1:
         screen.fill(black)
         pintarmapa()
@@ -97,7 +97,7 @@ if __name__ == '__main__':
             if event.type == pygame.QUIT: sys.exit()
             Eventos_teclado()
         if amplitud:
-            
+
             princesaMononoke.movimiento()
         if costo:
             princesaMononoke.movimiento()
