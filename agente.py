@@ -21,7 +21,7 @@ class agente:
 
     def setActuacion(self,algoritmo):
         self.actuacion = bfs.returnPath(algoritmo,self.percepcion)
-        
+        print(self.actuacion)
     def setMovimientos(self):
         self.movimientosRealizados = 0
 
