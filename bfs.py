@@ -107,7 +107,6 @@ def costoUniforme(mapa):
     cola = queue.PriorityQueue()
     visitados = list()
     nodos = list()
-    #makemapa()
     x,y = findElement("5",mapa)
     hijos = list()
     cola.put((0,[x,y]))
@@ -119,7 +118,6 @@ def costoUniforme(mapa):
         costoAcumulado = expandL[0]
         visitados.append(expand)
         nodos[findPadre(expand,nodos)][2] = 1
-        #print(expand[0],expand[1])
         if int(mapa[expand[0]][expand[1]]) == 4: # es meta?
             break
         hijos = hijosNodo([expand[0],expand[1]],mapa) # creo los hijos
