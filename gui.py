@@ -97,6 +97,7 @@ if __name__ == '__main__':
             if event.type == pygame.QUIT: sys.exit()
             Eventos_teclado()
         if amplitud:
+            
             princesaMononoke.movimiento()
         if costo:
             princesaMononoke.movimiento()
