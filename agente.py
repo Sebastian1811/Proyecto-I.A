@@ -1,7 +1,7 @@
 import bfs
 
 class agente:
-    
+
     percepcion = list()
     actuacion = list()
     posx = 0
@@ -21,6 +21,7 @@ class agente:
 
     def setActuacion(self,algoritmo):
         self.actuacion = bfs.returnPath(algoritmo,self.percepcion)
+        print(self.actuacion)
 
 
     def setMovimientos(self):

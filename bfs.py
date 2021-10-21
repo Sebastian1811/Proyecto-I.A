@@ -122,27 +122,25 @@ def costoUniforme(mapa):
         #print(expand[0],expand[1])
         if int(mapa[expand[0]][expand[1]]) == 4: # es meta?
             break
-        """if int(mapa[expand[0]][expand[1]]) == 3:
-            #refactorMapa()"""
         hijos = hijosNodo([expand[0],expand[1]],mapa) # creo los hijos
         if len(hijos) != 0:
             for i in range(len(hijos)):
                 if hijos[i] not in visitados: #no me devuelvo
                     tupla = hijos[i]
                     if int(mapa[tupla[0]][tupla[1]]) == 4 :
-                        cola.put((1+costoAcumulado,hijos[i]))
+                        cola.put((1+expandL[0],hijos[i]))
                         arbol_ = nodo.Nodo(nodos[len(nodos)-1],hijos[i],0)
                         arbol.append(arbol_.makenodo())
                         nodo_ = nodo.Nodo(nodos[findPadre(expand,nodos)],hijos[i],0)
                         nodos.append(nodo_.makenodo())
                     if int(mapa[tupla[0]][tupla[1]]) == 3 :
-                        cola.put((1+costoAcumulado,hijos[i]))
+                        cola.put((1+expandL[0],hijos[i]))
                         arbol_ = nodo.Nodo(nodos[len(nodos)-1],hijos[i],0)
                         arbol.append(arbol_.makenodo())
                         nodo_ = nodo.Nodo(nodos[findPadre(expand,nodos)],hijos[i],0)
                         nodos.append(nodo_.makenodo())
                     if int(mapa[tupla[0]][tupla[1]]) != 0 and int(mapa[tupla[0]][tupla[1]]) != 3 and int(mapa[tupla[0]][tupla[1]]) != 4 : # no deberia mirar muros xd
-                        cola.put((int(mapa[tupla[0]][tupla[1]])+costoAcumulado,hijos[i])) #hijos en cola
+                        cola.put((int(mapa[tupla[0]][tupla[1]])+expandL[0],hijos[i])) #hijos en cola
                         arbol_ = nodo.Nodo(nodos[len(nodos)-1],hijos[i],0)
                         arbol.append(arbol_.makenodo())
                         nodo_ = nodo.Nodo(nodos[findPadre(expand,nodos)],hijos[i],0)
@@ -203,4 +201,4 @@ def returnPath(algoritmo,mapa):
 
 if __name__ == '__main__':
 
-    print(returnPath(3,makemapa()))
+    print(returnPath(2,makemapa()))
