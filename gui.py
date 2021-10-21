@@ -31,6 +31,7 @@ costo = 0
 estadofinal = 0
 princesaMononoke = agente.agente('Mononoke')
 princesaMononoke.setPercepcion()
+princesaMononoke.setPercepcion()
 
 def Eventos_teclado():
 
