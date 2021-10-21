@@ -21,14 +21,12 @@ class agente:
 
     def setActuacion(self,algoritmo):
         self.actuacion = bfs.returnPath(algoritmo,self.percepcion)
-        print(self.actuacion)
-
-
+        
     def setMovimientos(self):
         self.movimientosRealizados = 0
 
     def movimiento(self):
-        if self.posx >= self.meta[0] and self.posy <= self.meta[1] and self.movimientosRealizados < len(self.actuacion):
+        if [self.posx,self.posy] != self.meta and self.movimientosRealizados < len(self.actuacion):
             self.percepcion[self.posx][self.posy] = '1'
             self.posx = self.actuacion[self.movimientosRealizados][0]
             self.posy = self.actuacion[self.movimientosRealizados][1]
