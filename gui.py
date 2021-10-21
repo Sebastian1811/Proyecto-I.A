@@ -3,7 +3,7 @@ import time
 import agente
 
 pygame.init()
-size = width, height = 620, 650
+size = width, height = 600, 650
 white = 255, 255, 255
 red = (255,0,0)
 black = (0,0,0)
@@ -70,19 +70,19 @@ def pintarmapa():
     for fila in range(len(mapa)):
         for  columna in range(len(mapa[0])):
             if mapa[fila][columna] == "0":
-                pygame.draw.rect(screen,black,[x,y,120,120],0)
+                pygame.draw.rect(screen,red,[x,y,120,120],0)
                 x+=121
             if mapa[fila][columna] == "5":
-                screen.blit(Mononoke,[x,y])
+                screen.blit(Mononoke,[x+10,y+10])
                 x+=121
             if mapa[fila][columna] == "3":
-                screen.blit(Ciervo,[x,y])
+                screen.blit(Ciervo,[x+10,y+10])
                 x+=121
             if mapa[fila][columna] == "4":
-                screen.blit(dios_Ciervo,[x,y])
+                screen.blit(dios_Ciervo,[x+10,y+10])
                 x+=121
             if mapa[fila][columna] == "2":
-                screen.blit(Elemental,[x,y])
+                screen.blit(Elemental,[x+10,y+10])
                 x+=121
             if mapa[fila][columna] == "1":
                 pygame.draw.rect(screen,white,[x,y,120,120],0)
