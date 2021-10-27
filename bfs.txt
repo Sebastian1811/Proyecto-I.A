@@ -1,0 +1,26 @@
+def bfs():
+    visitados = list()
+    nodos = list()
+    makemapa()
+    x,y = findElement("5")
+    hijos =list()
+    cola.append([x,y])
+    Nodo = nodo.Nodo(list(),[x,y],0)
+    nodos.append(Nodo.makenodo())
+    while len(cola) != 0:
+        expand = cola.popleft()
+        colaDibujo.append(expand)
+        visitados.append(expand)
+        #print(nodos[findPadre(expand,nodos)][2])
+        nodos[findPadre(expand,nodos)][2] = 1
+        if int(mapa[expand[0]][expand[1]]) == 4: # es meta?
+            break
+        hijos = hijosNodo([expand[0],expand[1]]) # creo los hijos
+        for i in range(len(hijos)):
+            if hijos[i] not in visitados: #no me devuelvo
+                tupla = hijos[i]
+                if int(mapa[tupla[0]][tupla[1]]) != 0: # no deberia mirar muros xd
+                    cola.append(hijos[i]) #hijos en cola
+                    #nodo_ = nodo.Nodo(nodos[len(nodos)-1],hijos[i])
+                    nodo_ = nodo.Nodo(nodos[findPadre(expand,nodos)],hijos[i],0)
+                    nodos.append(nodo_.makenodo())
