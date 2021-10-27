@@ -1,5 +1,6 @@
 venv1/
 __pycache__/
+.vscode/
 ball.py
 intro_ball.gif
 hola.txt
