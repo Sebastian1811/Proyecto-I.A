@@ -68,12 +68,7 @@ def hijosNodo(nodo,mapa):
         hijos.append([nodo[0],nodo[1]-1])
     return hijos
 
-"""def refactorMapa():
-    for i in range(len(mapa)):
-        for j in range(len(mapa[0])):
-            if mapa[i][j] == "2":
-                mapa[i][j] = "1"
-                """
+
 def bfs(mapa):
     global arbol
     cola = deque()
